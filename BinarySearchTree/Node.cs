@@ -13,7 +13,7 @@ namespace BinarySearchTree
         public Node left;
         public Node right;
         // constructor
-        public Node()
+        public Node(int value)
         {
 
         }
