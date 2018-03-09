@@ -25,7 +25,7 @@ namespace BinarySearchTree
                 root = newNode;
                 return;
             }
-            
+
             else
             {
                 if (root == null)
@@ -37,12 +37,46 @@ namespace BinarySearchTree
                 {
                     Add(ref root.left, value);
                 }
-                
+
                 else if (root.value > value)
                 {
                     Add(ref root.right, value);
                 }
-            }     
+            }
+        }
+        public bool Search(Node node, int value)
+        {
+            if (node == null)
+            {
+                return false;
+            }
+            if (node.value == value)
+            {
+                return true;
+            }
+            else if (node.value < value)
+            {
+                return Search(node.left, value);
+            }
+            else if (node.value > value)
+            {
+                return Search(node.right, value);
+            }
+            return false;
+        }
+
+        public void Display(Node node)
+        {
+            if (node == null)
+                return;
+            if (node == node.left)
+            {
+                Console.WriteLine("Left" + node.value);
+            }
+            else
+            {
+                Console.WriteLine("Right" + node.value);
+            }
         }
     }
 }

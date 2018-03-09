@@ -9,14 +9,65 @@ namespace BinarySearchTree
     class Node
     {
         // member variables
-        public int value;
+        public int numberInNode;
         public Node left;
         public Node right;
-        // constructor
-        public Node(int value)
-        {
+        public Node parent; 
 
+        // constructor
+        public Node(int numberInNode)
+        {
+            this.numberInNode = numberInNode;
+            left = null;
+            right = null;
         }
         // member methods
+        public int NumberInNode
+        {
+            get
+            {
+                return numberInNode;
+            }
+            set
+            {
+                numberInNode = value;
+            }
+        }
+
+        public Node Left
+        {
+            get
+            {
+                return left;
+            }
+            set
+            {
+                left = value;
+            }
+        }
+
+        public Node Right
+        {
+            get
+            {
+                return right;
+            }
+            set
+            {
+                right = value;
+            }
+        }
+
+        public Node Parent
+        {
+            get
+            {
+                return parent;
+            }
+            set
+            {
+                parent = value;
+            }
+        }
     }
 }
