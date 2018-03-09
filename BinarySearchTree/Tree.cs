@@ -9,39 +9,76 @@ namespace BinarySearchTree
     class Tree
     {
         // member variables
-        Node root;
+        public Node root;
+
         // constructor
         public Tree()
         {
-            root = null;
+
+        }
+
+        public Tree(int value)
+        {
+            root = new Node(value);
         }
 
         // member methods
-        public void Add(ref Node root, int value)
+        public void AddRoot(int value)
         {
+            root = new Node(value);
+        }
+
+        public void Insert(int input)
+        {
+            Node replacementNode = new Node(input);
             if (root == null)
             {
-                Node newNode = new Node(value);
-                root = newNode;
-                return;
+                AddRoot(input);
             }
-
-            else
+            else if (root.Right == null)
             {
-                if (root == null)
+                if (replacementNode.NumberInNode >= root.NumberInNode)
                 {
-                    root = new Node(value);
+                    root.Right = replacementNode;
+                    replacementNode.Parent = root;
                 }
-
-                else if (root.value < value)
+            }
+            else if (replacementNode.NumberInNode >= root.NumberInNode)
+            {
+                Add(root.Right, replacementNode);
+            }
+            else if (root.Left == null)
+            {
+                if (replacementNode.NumberInNode < root.NumberInNode)
                 {
-                    Add(ref root.left, value);
+                    root.Left = replacementNode;
+                    replacementNode.Parent = root;
                 }
-
-                else if (root.value > value)
-                {
-                    Add(ref root.right, value);
-                }
+            }
+            else if (replacementNode.NumberInNode < root.NumberInNode)
+            {
+                Add(root.Left, replacementNode);
+            }
+        }
+        public void Add(Node node, Node replacementNode)
+        {
+            if (replacementNode.NumberInNode >= node.NumberInNode && node.Right == null)
+            {
+                node.Right = replacementNode;
+                replacementNode.Parent = node;
+            }
+            else if (replacementNode.NumberInNode >= node.NumberInNode)
+            {
+                Add(node.Right, replacementNode);
+            }
+            else if (replacementNode.NumberInNode < node.NumberInNode && node.Left == null)
+            {
+                node.Left = replacementNode;
+                replacementNode.Parent = node;
+            }
+            else if (replacementNode.NumberInNode < node.NumberInNode)
+            {
+                Add(node.Left, replacementNode);
             }
         }
         public bool Search(Node node, int value)
