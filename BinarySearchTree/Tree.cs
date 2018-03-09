@@ -81,38 +81,43 @@ namespace BinarySearchTree
                 Add(node.Left, replacementNode);
             }
         }
-        public bool Search(Node node, int value)
+        public void Search(int value, Node currentNode = null)
         {
-            if (node == null)
+            if (currentNode == null)
             {
-                return false;
+                currentNode = root;
+                Search(value, currentNode);
             }
-            if (node.value == value)
+            else if (value > currentNode.NumberInNode)
             {
-                return true;
+                if (currentNode.Right == null)
+                {
+                    Console.WriteLine("You value wasn't found.");
+                    return;
+                }
+                currentNode = currentNode.Right;
+                Console.WriteLine("Right");
+                Search(value, currentNode);
             }
-            else if (node.value < value)
+            else if (value < currentNode.NumberInNode)
             {
-                return Search(node.left, value);
+                if (currentNode.Left == null)
+                {
+                    Console.WriteLine("Your value wasn't found.");
+                    return;
+                }
+                currentNode = currentNode.Left;
+                Console.WriteLine("Left");
+                Search(value, currentNode);
             }
-            else if (node.value > value)
+            else if (value == currentNode.NumberInNode)
             {
-                return Search(node.right, value);
-            }
-            return false;
-        }
-
-        public void Display(Node node)
-        {
-            if (node == null)
-                return;
-            if (node == node.left)
-            {
-                Console.WriteLine("Left" + node.value);
+                currentNode.NumberInNode = value;
+                Console.WriteLine("Value is found.");
             }
             else
             {
-                Console.WriteLine("Right" + node.value);
+                Console.WriteLine("Your value wasn't found.");
             }
         }
     }
